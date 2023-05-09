@@ -10,6 +10,7 @@ import adminService from '../../services/adminService';
 import { handlerLoginApi } from '../../services/userService';
 import { Label } from 'reactstrap';
 import e from 'cors';
+import { userLoginLotkhe } from '../../store/actions/userActions'
 
 class Login extends Component {
     constructor(props) {
@@ -45,7 +46,7 @@ class Login extends Component {
                 })
             }
             if (data && data.errCode == 0) {
-                userLoginLotkhe(data.user)
+                this.props.userLoginLotkhe(data.user)
                 console.log('lọt khe')
             }
         } catch (error) {
@@ -130,7 +131,7 @@ const mapDispatchToProps = dispatch => {
         navigate: (path) => dispatch(push(path)),
         // adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
         // adminLoginFail: () => dispatch(actions.adminLoginFail()),
-        userLoginLotkhe: () => dispatch(actions.userLoginLotkhe(userInfo))
+        userLoginLotkhe: (userInfo) => dispatch(actions.userLoginLotkhe(userInfo)),
     };
 };
 

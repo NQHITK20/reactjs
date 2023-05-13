@@ -1,7 +1,6 @@
 .home-header-container {
-    height : 60px;
+    height : 65px;
     width  : 100%;
-    border : 1px solid red;
     padding: 0 20px;
 
     .home-header-content {
@@ -10,19 +9,22 @@
         display: flex;
 
         .left-content {
-            width      : 25%;
-            display    : flex;
-            align-items: center;
+            width       : 25%;
+            display     : flex;
+            align-items : center;
+            padding-left: 40px;
 
             .header-logo {
-                background: url(../../assets/bookingcare-2020.svg) center center no-repeat;
-                height    : 100%;
-                width     : 100%;
-                cursor    : pointer;
+                background : url(../../assets/bookingcare-2020.svg) center center no-repeat;
+                height     : 55%;
+                width      : 70%;
+                cursor     : pointer;
+                display    : flex;
+                align-items: center;
             }
 
             i {
-                font-size  : 25px;
+                font-size  : 23px;
                 color      : grey;
                 line-height: 2;
                 cursor     : pointer;
@@ -48,38 +50,136 @@
         .right-content {
             width          : 25%;
             display        : flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items    : center;
 
-            .support {}
+
+            .support {
+                padding-right: 50px;
+                display      : flex;
+                align-items  : center;
+                cursor       : pointer;
+            }
+
+            .language-vi {
+                cursor: pointer;
+
+                &.active {
+                    color: orange;
+                }
+            }
+
+            .language-en {
+                margin: 0 10px;
+                cursor: pointer;
+
+
+                &.active {
+                    color: blue;
+                }
+            }
         }
     }
 
 }
 
 .home-header-banner {
-    background         : url(../../assets/banner.jpg);
+    background-image   : url(../../assets/banner.jpg);
     height             : 485px;
     background-repeat  : no-repeat;
     background-size    : cover;
     background-position: center;
+    display            : flex;
+    flex-direction     : column;
 
-    .title1 {
-        text-align : center;
-        font-size  : 30px;
-        text-shadow: 1px 1px 1px #333;
-        color      : white;
-        padding    : 50px 0 5px 0;
+    .content-up {
+        height          : 65%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
+
+        .title1 {
+            text-align : center;
+            font-size  : 30px;
+            text-shadow: 1px 1px 1px #333;
+            color      : white;
+            padding    : 50px 0 5px 0;
+        }
+
+        .title2 {
+            text-align   : center;
+            font-size    : 30px;
+            text-shadow  : 1px 1px 1px #333;
+            color        : white;
+            margin-bottom: 15px;
+        }
+
+        .search {
+            width           : fit-content;
+            display         : flex;
+            justify-content : center;
+            align-items     : center;
+            margin          : 0 auto;
+            padding         : 10px;
+            border-radius   : 25px;
+            background-color: #f7d800;
+
+            i {
+                margin: 0 5px;
+            }
+
+            input {
+                height    : 30px;
+                width     : 360px;
+                background: transparent;
+                border    : none;
+                outline   : none;
+            }
+        }
+
     }
 
-    .title2 {
-        text-align : center;
-        font-size  : 30px;
-        text-shadow: 1px 1px 1px #333;
-        color      : white;
+    .content-down {
+        height          : 35%;
+        display         : flex;
+        align-items     : flex-end;
+        justify-content : center;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+
+        .options {
+            display        : flex;
+            text-align     : center;
+            gap            : 50px;
+            justify-content: center;
+
+            .option-child {
+                width: 100px;
+
+                .icon-child {
+                    background   : white;
+                    width        : 70px;
+                    height       : 70px;
+                    padding      : 10px;
+                    margin       : 0 auto;
+                    text-align   : center;
+                    border-radius: 50%;
+
+                    i {
+                        font-size: 30px;
+                        color    : #49bce2;
+                    }
+                }
+
+                .text-child {
+                    font-size  : 17px;
+                    font-weight: 600;
+                    cursor     : pointer;
+
+                    &:hover {
+                        color: #49bce2;
+                    }
+                }
+            }
+        }
+
     }
 
-    .search {}
-
-    .options {}
 }

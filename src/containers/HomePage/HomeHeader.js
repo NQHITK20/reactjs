@@ -38,19 +38,52 @@ class HomeHeader extends Component {
                         </div>
                         <div className='right-content'>
                             <div className='support'>
-                                <i className="far fa-question-circle">Hỗ trợ</i>
+                                <i className="far fa-question-circle">   Hỗ trợ</i>
                             </div>
-                            <div className='flag'>VN</div>
+                            <div className='language-vi'>VN</div>
+                            <div className='language-en'>EN</div>
                         </div>
                     </div>
                 </div>
                 <div className='home-header-banner'>
-                    <div className='title1'>NỀN TẢNG Y TẾ</div>
-                    <div className='title2'>CHĂM SÓC SỨC KHỎE TOÀN DIỆN</div>
-                    <div className='search'></div>
-                    <div className='options'></div>
+                    <div className='content-up'>
+                        <div className='title1'>NỀN TẢNG Y TẾ</div>
+                        <div className='title2'>CHĂM SÓC SỨC KHỎE TOÀN DIỆN</div>
+                        <div className='search'>
+                            <i className="fas fa-search"></i>
+                            <input type='text' placeholder='Tìm trai cu bự' />
+                        </div>
+                    </div>
+                    <div className='content-down'>
+                        <div className='options'>
+                            <div className='option-child'>
+                                <div className='icon-child'><i className="far fa-hospital"></i></div>
+                                <div className='text-child'>Khám chuyên khoa</div>
+                            </div>
+                            <div className='option-child'>
+                                <div className='icon-child'><i className="fas fa-mobile"></i></div>
+                                <div className='text-child'>Khám từ xa</div>
+                            </div>
+                            <div className='option-child'>
+                                <div className='icon-child'><i className="fas fa-procedures"></i></div>
+                                <div className='text-child'>Khám tổng quát</div>
+                            </div>
+                            <div className='option-child'>
+                                <div className='icon-child'><i className="fas fa-notes-medical"></i></div>
+                                <div className='text-child'>Xét nghiệm y học </div>
+                            </div>
+                            <div className='option-child'>
+                                <div className='icon-child'><i className="fas fa-smile"></i></div>
+                                <div className='text-child'>Sức khỏe tinh thần </div>
+                            </div>
+                            <div className='option-child'>
+                                <div className='icon-child'><i class="fas fa-cut"></i></div>
+                                <div className='text-child'>Khám trym</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </React.Fragment>
+            </React.Fragment >
 
         );
     }

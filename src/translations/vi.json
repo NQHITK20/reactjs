@@ -1,4 +1,25 @@
 {
+    "home-header": {
+        "shit1": "Chuyên Khoa",
+        "shit2": "Tìm bác sĩ theo chuyên khoa",
+        "shit3": "Cơ sở y tế",
+        "shit4": "Chọn bệnh viện phòng khám",
+        "shit5": "Bác sĩ",
+        "shit6": "Chọn bác sĩ giỏi",
+        "shit7": "Gói khám",
+        "shit8": "Khám sức khỏe tổng quát",
+        "shit9": "Hỗ trợ"
+    },
+    "banner": {
+        "t1": "NỀN TẢNG Y TẾ",
+        "t2": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+        "t3": "Khám chuyên khoa",
+        "t4": "Khám từ xa",
+        "t5": "Khám tổng quát",
+        "t6": "Xét nghiệm y học",
+        "t7": "Sức khỏe tinh thần",
+        "t8": "Khám trym"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

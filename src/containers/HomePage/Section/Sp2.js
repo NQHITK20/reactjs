@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Sp2.scss'
 import { FormattedMessage } from 'react-intl'
 import Slider from 'react-slick';
 import "../../../../node_modules/slick-carousel/slick/slick.css";

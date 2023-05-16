@@ -1,0 +1,70 @@
+.section-Sp {
+    height : 330px;
+    padding: 10px;
+
+    .Sp-content {
+        margin: 0 50px;
+
+        .Sp-header {
+            padding: 25px;
+
+            .sp-title {
+                font-size  : 22px;
+                font-weight: 600;
+            }
+
+            .sp-btn {
+                font-size : 13px;
+                float     : right;
+                padding   : 10px 15px;
+                border    : none;
+                outline   : none;
+                display   : block;
+                background: #ebebeb;
+                color     : black;
+                cursor    : pointer;
+
+                &:hover {
+                    color     : #fff;
+                    background: #f7d800;
+                }
+            }
+        }
+
+        .Sp-body {
+
+            .img-nude {
+                height: 300px;
+                cursor: pointer;
+            }
+
+            p {
+                font-family: cursive;
+
+                &:hover {
+                    color: #49bce2;
+                }
+            }
+
+
+        }
+    }
+}
+
+
+
+.slick-prev:before {
+    font-size  : 48px !important;
+    line-height: 1.1 !important;
+}
+
+
+
+.slick-next:before {
+    font-size  : 48px !important;
+    line-height: 1.1 !important;
+}
+
+.slick-slide img {
+    width: 300px;
+}

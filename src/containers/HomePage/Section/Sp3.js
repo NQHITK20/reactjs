@@ -21,11 +21,11 @@ class Sp3 extends Component {
                     </div>
                     <div className='Sp-body'>
                         <Slider {...this.props.settings}>
-                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
-                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
-                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
-                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
-                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
+                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johnny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
+                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johnny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
+                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johnny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
+                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johnny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
+                            <div className='img-nude set-1'><img src={anh} className="imgg" /><p>Dr.Johnny Sins</p><b></b><p>Master deegree in healthy activities</p></div>
 
                         </Slider>
                     </div>

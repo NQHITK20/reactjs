@@ -5,7 +5,11 @@ import Sp2 from './Section/Sp2';
 import Sp1 from './Section/Sp1';
 import Sp3 from './Section/Sp3';
 import Sp4 from './Section/Sp4';
+import About from './Section/About';
+import Footer from './Section/Footer';
 import "./HomePage.scss"
+import "../../../node_modules/slick-carousel/slick/slick.css"
+import "../../../node_modules/slick-carousel/slick/slick-theme.css"
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -47,6 +51,8 @@ class HomePage extends Component {
                 <Sp2 settings={settings} />
                 <Sp3 settings={settings} />
                 <Sp4 settings={settings} />
+                <About />
+                <Footer />
             </div>
         );
     }

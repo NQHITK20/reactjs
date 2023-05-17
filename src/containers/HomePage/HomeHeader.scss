@@ -1,7 +1,11 @@
 .home-header-container {
-    height : 65px;
-    width  : 100%;
-    padding: 0 20px;
+    height    : 65px;
+    width     : 100%;
+    padding   : 0 20px;
+    top       : 0;
+    position  : sticky;
+    z-index   : 10000;
+    background: white;
 
     .home-header-content {
         width  : 100%;

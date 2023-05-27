@@ -19,8 +19,8 @@ class About extends Component {
                                 width="55%" height="400px"
                                 src="https://www.youtube.com/embed/J59y_WWDWwo"
                                 title="Câu Chuyện Cảm Động Về Huyền Thoại Johnny Sins"
-                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-                            gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+                            gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         </div>
                         <div className='about-left'></div>
                     </div>

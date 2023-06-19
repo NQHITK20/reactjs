@@ -39,7 +39,6 @@ export const fetchGenderFailed = () => ({
 export const fetchPositionStart = () => {
     return async (dispatch, getState) => {
         try {
-
             let res = await getAllcode2('POSITION')
             console.log('check res', res);
             if (res && res.errCode === 0) {
@@ -54,6 +53,23 @@ export const fetchPositionStart = () => {
     }
 
 }
+export const createNewUSer = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await ;
+            if (res && res.errCode === 0) {
+                dispatch(saveUserSuccess());
+            } else {
+                dispatch(saveUserFailed());
+            }
+        } catch (e) {
+            dispatch(saveUserFailed())
+        }
+    }
+}
+export const saveUserFailed = () => ({
+
+})
 export const fetchPositionSuccess = (data) => ({
     type: actionTypes.FETCH_POSITION_SUCCESS,
     data

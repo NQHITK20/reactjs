@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllcode2 } from '../../services/userService';
+import { getAllcode2, createUser } from '../../services/userService';
 
 
 // export const fetchGenderStart = () => ({
@@ -53,10 +53,10 @@ export const fetchPositionStart = () => {
     }
 
 }
-export const createNewUSer = () => {
+export const createNewUSer = (data) => {
     return async (dispatch, getState) => {
         try {
-            let res = await ;
+            let res = await createUser(data);
             if (res && res.errCode === 0) {
                 dispatch(saveUserSuccess());
             } else {
@@ -68,7 +68,10 @@ export const createNewUSer = () => {
     }
 }
 export const saveUserFailed = () => ({
-
+    type: 'CREATE_USER_FAILED'
+})
+export const saveUserSuccess = () => ({
+    type: 'CREATE_USER_SUCCESS'
 })
 export const fetchPositionSuccess = (data) => ({
     type: actionTypes.FETCH_POSITION_SUCCESS,

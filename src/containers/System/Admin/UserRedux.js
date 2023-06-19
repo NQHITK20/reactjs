@@ -6,6 +6,7 @@ import * as actions from "../../../store/actions"
 import "./UserRedux.scss"
 import Lightbox from 'react-image-lightbox';
 import '../../../../node_modules/react-image-lightbox/style.css';
+import { createNewUSer } from '../../../store/actions';
 class UserRedux extends Component {
 
     constructor(props) {
@@ -283,7 +284,11 @@ const mapDispatchToProps = dispatch => {
     return {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPotitionStart: () => dispatch(actions.fetchPositionStart()),
-        getRoleStart: () => dispatch(actions.fetchRoleStart())
+        getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        createNewUSer: (data) => dispatch(actions.createNewUSer(data))
+
+
+
         // processLogout: () => dispatch(actions.processLogout()),
         // switchVEAppRedux: (language) => dispatch(actions.switchVEApp(language))
     };

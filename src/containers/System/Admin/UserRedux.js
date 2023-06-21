@@ -7,6 +7,8 @@ import "./UserRedux.scss"
 import Lightbox from 'react-image-lightbox';
 import '../../../../node_modules/react-image-lightbox/style.css';
 import { createNewUSer } from '../../../store/actions';
+import TableManageUser from './TableManageUser';
+
 class UserRedux extends Component {
 
     constructor(props) {
@@ -93,7 +95,7 @@ class UserRedux extends Component {
     checkValidateInput = () => {
         let isValid = true;
         let arrCheck = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address']
-        for (let i = 0; i <= arrCheck.length; i++) {
+        for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
                 alert('Missing input this litle  ' + arrCheck[i]);
@@ -114,6 +116,18 @@ class UserRedux extends Component {
         if (isValid === false) return;
 
         //fire redux action
+        this.props.createNewUSer({
+            email: this.state.email,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phonenumber: this.state.phoneNumber,
+            gender: this.state.gender,
+            image: this.state.image,
+            roleId: this.state.role,
+            positionId: this.state.position
+        })
     }
 
 
@@ -248,15 +262,17 @@ class UserRedux extends Component {
                                     ></div>
                                 </div>
                             </div>
-                            <div className='col-12 mt-3'>
+                            <div className='col-12 my-3'>
                                 <button
                                     onClick={() => this.handleSaveUser()}
                                     className='btn btn-primary'><FormattedMessage id='manage-user.confirm' /></button>
                             </div>
+                            <div className='col-12'>
+                                <TableManageUser />
+
+                            </div>
                         </div>
                     </div>
-
-
                     {this.state.isOpen === true &&
                         <Lightbox
                             mainSrc={this.state.previewImgURL}

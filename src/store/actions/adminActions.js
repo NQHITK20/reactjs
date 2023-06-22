@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllcode2, createUser } from '../../services/userService';
+import { getAllcode2, createUser, getAllUsers } from '../../services/userService';
 
 
 // export const fetchGenderStart = () => ({
@@ -13,7 +13,6 @@ export const fetchGenderStart = () => {
                 type: actionTypes.FETCH_GENDER_START
             })
             let res = await getAllcode2('GENDER')
-            console.log('check res', res);
             if (res && res.errCode === 0) {
                 dispatch(fetchGenderSuccess(res.data));
             } else {
@@ -40,7 +39,6 @@ export const fetchPositionStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllcode2('POSITION')
-            console.log('check res', res);
             if (res && res.errCode === 0) {
                 dispatch(fetchPositionSuccess(res.data));
             } else {
@@ -84,14 +82,11 @@ export const fetchPositionFailed = () => ({
 
 
 
-
-
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
         try {
 
             let res = await getAllcode2("ROLE")
-            console.log('check res', res);
             if (res && res.errCode === 0) {
                 dispatch(fetchRoleSuccess(res.data));
             } else {
@@ -112,3 +107,28 @@ export const fetchRoleFailed = () => ({
     type: actionTypes.FETCH_ROLE_FAILED
 })
 //start doing end
+
+
+
+export const fetchAllUsersStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllUsers("ALL")
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllUsersSuccess(res.users));
+            } else {
+                dispatch(fetchAllUsersFailed());
+            }
+        } catch (e) {
+            dispatch(fetchAllUsersFailed());
+            console.log('fetch All users failed', e);
+        }
+    }
+}
+export const fetchAllUsersSuccess = (data) => ({
+    type: 'FETCH_ALL_USERS_SUCCESS',
+    users: data
+})
+export const fetchAllUsersFailed = () => ({
+    type: 'FETCH_ALL_USERS_FAILED',
+})

@@ -1,5 +1,6 @@
 import actionTypes from './actionTypes';
 import { getAllcode2, createUser, getAllUsers } from '../../services/userService';
+import { toast } from "react-toastify";
 
 
 // export const fetchGenderStart = () => ({
@@ -55,9 +56,10 @@ export const createNewUSer = (data) => {
     return async (dispatch, getState) => {
         try {
             let res = await createUser(data);
-            console.log('check create user', res)
             if (res && res.errCode === 0) {
                 dispatch(saveUserSuccess());
+                dispatch(fetchAllUsersStart());
+                toast.success("TẠO THÀNH CÔNG 1 CHÁU");
             } else {
                 dispatch(saveUserFailed());
             }
@@ -115,7 +117,7 @@ export const fetchAllUsersStart = () => {
         try {
             let res = await getAllUsers("ALL")
             if (res && res.errCode === 0) {
-                dispatch(fetchAllUsersSuccess(res.users));
+                dispatch(fetchAllUsersSuccess(res.users.reverse()));
             } else {
                 dispatch(fetchAllUsersFailed());
             }

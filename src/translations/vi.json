@@ -37,7 +37,7 @@
         }
     },
     "manage-user": {
-        "add": "thêm mới người dùng",
+        "add": "Thêm mới người dùng",
         "password": "mật khẩu",
         "firstname": "Tên",
         "lastname": "Họ",

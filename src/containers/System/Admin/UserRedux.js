@@ -77,7 +77,20 @@ class UserRedux extends Component {
                 positionArr: arrPosition,
                 position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : ''
             })
-
+        }
+        if (prevProps.listUsers !== this.props.listUsers) {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: '',
+                position: '',
+                role: '',
+                avatar: ''
+            })
         }
     }
     handleOnchangeImage = (event) => {
@@ -115,6 +128,11 @@ class UserRedux extends Component {
         let isValid = this.checkValidateInput()
         if (isValid === false) return;
 
+
+        this.setState({
+            ...this.state,
+            isUserCreated: false
+        })
         //fire redux action
         this.props.createNewUSer({
             email: this.state.email,
@@ -267,7 +285,7 @@ class UserRedux extends Component {
                                     onClick={() => this.handleSaveUser()}
                                     className='btn btn-primary'><FormattedMessage id='manage-user.confirm' /></button>
                             </div>
-                            <div className='col-12'>
+                            <div className='col-12 mb-5'>
                                 <TableManageUser />
 
                             </div>
@@ -292,7 +310,9 @@ const mapStateToProps = state => {
         genderRedux: state.admin.genders,
         roleRedux: state.admin.roles,
         positionsRedux: state.admin.positions,
-        isLoadingGender: state.admin.isLoadingGender
+        isLoadingGender: state.admin.isLoadingGender,
+        listUsers: state.admin.users
+
     };
 };
 
@@ -301,7 +321,8 @@ const mapDispatchToProps = dispatch => {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPotitionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
-        createNewUSer: (data) => dispatch(actions.createNewUSer(data))
+        createNewUSer: (data) => dispatch(actions.createNewUSer(data)),
+        fetchUserRedux: () => dispatch(actions.fetchAllUsersStart())
 
 
 

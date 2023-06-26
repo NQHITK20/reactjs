@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllcode2, createUser, getAllUsers } from '../../services/userService';
+import { getAllcode2, createUser, getAllUsers, deleteUserService } from '../../services/userService';
 import { toast } from "react-toastify";
 
 
@@ -120,10 +120,12 @@ export const fetchAllUsersStart = () => {
                 dispatch(fetchAllUsersSuccess(res.users.reverse()));
             } else {
                 dispatch(fetchAllUsersFailed());
+                toast.error("BUG FETCH");
             }
         } catch (e) {
             dispatch(fetchAllUsersFailed());
-            console.log('fetch All users failed', e);
+            toast.error("BUG FETCH");
+
         }
     }
 }
@@ -133,4 +135,32 @@ export const fetchAllUsersSuccess = (data) => ({
 })
 export const fetchAllUsersFailed = () => ({
     type: 'FETCH_ALL_USERS_FAILED',
+})
+
+
+export const deleteUser = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await deleteUserService(userId);
+            if (res && res.errCode === 0) {
+                dispatch(deleteUserSuccess());
+                dispatch(fetchAllUsersStart());
+                toast.success("ISEKAI THÀNH CÔNG 1 CHÁU");
+            } else {
+                toast.error("ISEKAI NOT THÀNH CÔNG 1 CHÁU");
+                dispatch(deleteUserSuccess());
+            }
+        } catch (e) {
+            toast.error("ISEKAI NOT THÀNH CÔNG 1 CHÁU");
+            dispatch(deleteUserFailed())
+        }
+    }
+}
+
+export const deleteUserSuccess = () => ({
+    type: actionTypes.DELETE_USER_SUCCESS,
+})
+
+export const deleteUserFailed = () => ({
+    type: actionTypes.DELETE_USER_FAILED,
 })

@@ -65,6 +65,7 @@ class UserRedux extends Component {
         }
         if (prevProps.roleRedux !== this.props.roleRedux) {
             let arrRole = this.props.roleRedux;
+
             this.setState({
                 roleArr: arrRole,
                 role: arrRole && arrRole.length > 0 ? arrRole[0].key : ''
@@ -79,6 +80,9 @@ class UserRedux extends Component {
             })
         }
         if (prevProps.listUsers !== this.props.listUsers) {
+            let arrRole = this.props.roleRedux;
+            let arrPosition = this.props.positionsRedux;
+            let arrGenders = this.props.genderRedux;
             this.setState({
                 email: '',
                 password: '',
@@ -86,9 +90,9 @@ class UserRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : '',
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : '',
+                role: arrRole && arrRole.length > 0 ? arrRole[0].key : '',
                 avatar: ''
             })
         }
@@ -167,6 +171,22 @@ class UserRedux extends Component {
         //     role: '',
         //     avatar: ''
     }
+
+    handleEditUserFromParent = (user) => {
+        console.log('check fr parent', user);
+        this.setState({
+            email: user.email,
+            password: 'HARDCORE',
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            address: user.address,
+            gender: user.gender,
+            position: user.position,
+            role: user.roleId,
+            avatar: ''
+        })
+    }
     render() {
         let genderss = this.state.genderArr
         let roleArr = this.state.roleArr
@@ -229,6 +249,7 @@ class UserRedux extends Component {
                                 <label><FormattedMessage id='manage-user.gender' /></label>
                                 <select className="form-control"
                                     onChange={(event) => { this.onChaneInput(event, 'gender') }}
+                                    value={gender}
                                 >
                                     {genderss && genderss.length > 0 &&
                                         genderss.map((item, index) => {
@@ -243,6 +264,7 @@ class UserRedux extends Component {
                                 <label><FormattedMessage id='manage-user.position' /></label>
                                 <select className="form-control"
                                     onChange={(event) => { this.onChaneInput(event, 'position') }}
+                                    value={position}
                                 >
                                     {positionArr && positionArr.length > 0 &&
                                         positionArr.map((item, index) => {
@@ -257,6 +279,7 @@ class UserRedux extends Component {
                                 <label>RoleId</label>
                                 <select className="form-control"
                                     onChange={(event) => { this.onChaneInput(event, 'role') }}
+                                    value={role}
                                 >
                                     {roleArr && roleArr.length > 0 &&
                                         roleArr.map((item, index) => {
@@ -286,8 +309,9 @@ class UserRedux extends Component {
                                     className='btn btn-primary'><FormattedMessage id='manage-user.confirm' /></button>
                             </div>
                             <div className='col-12 mb-5'>
-                                <TableManageUser />
-
+                                <TableManageUser
+                                    handleEditUserFromParent={this.handleEditUserFromParent}
+                                />
                             </div>
                         </div>
                     </div>

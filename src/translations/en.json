@@ -38,6 +38,7 @@
     },
     "manage-user": {
         "add": "add new staff",
+        "editadd": "Edit info",
         "password": "password",
         "firstname": "first name",
         "lastname": "last name",
@@ -46,6 +47,7 @@
         "gender": "gender",
         "position": "position",
         "avatar": "Avatar",
-        "confirm": "confirm"
+        "confirm": "confirm",
+        "edit": "confirm edition"
     }
 }

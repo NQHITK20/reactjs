@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllcode2, createUser, getAllUsers, deleteUserService } from '../../services/userService';
+import { getAllcode2, createUser, getAllUsers, deleteUserService, editUserService } from '../../services/userService';
 import { toast } from "react-toastify";
 
 
@@ -147,11 +147,11 @@ export const deleteUser = (userId) => {
                 dispatch(fetchAllUsersStart());
                 toast.success("ISEKAI THÀNH CÔNG 1 CHÁU");
             } else {
-                toast.error("ISEKAI NOT THÀNH CÔNG 1 CHÁU");
+                toast.error("ISEKAI HỤT 1 CHÁU");
                 dispatch(deleteUserSuccess());
             }
         } catch (e) {
-            toast.error("ISEKAI NOT THÀNH CÔNG 1 CHÁU");
+            toast.error("ISEKAI HỤT 1 CHÁU");
             dispatch(deleteUserFailed())
         }
     }
@@ -163,4 +163,32 @@ export const deleteUserSuccess = () => ({
 
 export const deleteUserFailed = () => ({
     type: actionTypes.DELETE_USER_FAILED,
+})
+
+export const editUser = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await editUserService(data);
+            if (res && res.errCode === 0) {
+                toast.success("Update THÀNH CÔNG 1 CHÁU");
+                dispatch(editUserSuccess());
+                dispatch(fetchAllUsersStart());
+            } else {
+                toast.error("Update HỤT 1 CHÁU");
+                dispatch(editUserSuccess());
+            }
+        } catch (e) {
+            toast.error("Update HỤT 1 CHÁU");
+            dispatch(editUserFailed())
+            console.log("edit user failed err", e)
+        }
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS,
+})
+
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED,
 })

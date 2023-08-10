@@ -38,6 +38,7 @@
     },
     "manage-user": {
         "add": "Thêm mới người dùng",
+        "editadd": "Sửa thông tin người dùng",
         "password": "mật khẩu",
         "firstname": "Tên",
         "lastname": "Họ",
@@ -46,6 +47,7 @@
         "gender": "giới tính",
         "position": "Chức danh",
         "avatar": "Ảnh đại diện",
-        "confirm": "xác nhận"
+        "confirm": "xác nhận",
+        "edit": "Lưu thay đổi"
     }
 }

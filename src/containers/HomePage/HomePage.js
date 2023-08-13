@@ -33,14 +33,17 @@ function SamplePrevArrow(props) {
     );
 }
 class HomePage extends Component {
-
+    // handleAfterChange = (event, slick, currentSlice) => {
+    //     console.log('check change', currentSlice)
+    // }
     render() {
         let settings = {
             dots: false,
-            Infinite: true,
+            infinite: false,
             speed: 800,
             slidesToShow: 4,
-            slidesToScroll: 1,
+            slidesToScroll: 2,
+            // afterChange: this.handleAfterChange(),
             nextArrow: <SampleNextArrow />,
             prevArrow: <SamplePrevArrow />
         };

@@ -22,4 +22,11 @@ const getAllcode2 = (type) => {
     return axios.get(`/api/allcode?type=${type}`)
 
 }
-export { handlerLoginApi, getAllUsers, createUser, deleteUserService, editUserService, getAllcode2 }
+const getTopDoctorHome = (limit) => {
+    return axios.get(`/api/top-doctor-home?limit=${limit}`)
+}
+export {
+    handlerLoginApi, getAllUsers,
+    createUser, deleteUserService,
+    editUserService, getAllcode2, getTopDoctorHome
+}

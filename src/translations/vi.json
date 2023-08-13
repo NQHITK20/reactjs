@@ -49,5 +49,9 @@
         "avatar": "Ảnh đại diện",
         "confirm": "xác nhận",
         "edit": "Lưu thay đổi"
+    },
+    "homepage": {
+        "best-doc": "Bác sĩ nổi bật tuần qua",
+        "more": "Xem thêm"
     }
 }

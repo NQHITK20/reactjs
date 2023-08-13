@@ -109,6 +109,10 @@
     line-height: 1.1 !important;
 }
 
+.slick-disabled {
+    display: none !important;
+}
+
 .slick-slide img {
     width: 300px;
 }

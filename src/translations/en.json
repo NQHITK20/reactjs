@@ -49,5 +49,9 @@
         "avatar": "Avatar",
         "confirm": "confirm",
         "edit": "confirm edition"
+    },
+    "homepage": {
+        "best-doc": "Out standing Doctor",
+        "more": "More info"
     }
 }

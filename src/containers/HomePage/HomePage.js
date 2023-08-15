@@ -10,6 +10,8 @@ import Footer from './Section/Footer';
 import "./HomePage.scss"
 import "../../../node_modules/slick-carousel/slick/slick.css"
 import "../../../node_modules/slick-carousel/slick/slick-theme.css"
+
+
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (

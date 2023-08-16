@@ -1,5 +1,9 @@
 import actionTypes from './actionTypes';
-import { getAllcode2, createUser, getAllUsers, deleteUserService, editUserService, getTopDoctorHome, getAllDoctor } from '../../services/userService';
+import {
+    getAllcode2, createUser, getAllUsers,
+    deleteUserService, editUserService, getTopDoctorHome,
+    getAllDoctor, saveDetailDoctor
+} from '../../services/userService';
 import { toast } from "react-toastify";
 
 
@@ -236,6 +240,31 @@ export const fetchAllDoctor = () => {
             dispatch({
                 type: actionTypes.FETCH_ALL_DOCTOR_FAILED,
             })
+        }
+    }
+}
+
+export const saveDetailDoctors = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await saveDetailDoctor(data);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+                })
+                toast.success("Save THÀNH CÔNG 1 CHÁU");
+            } else {
+                dispatch({
+                    type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
+                })
+                toast.error("Save No THÀNH CÔNG 1 CHÁU");
+            }
+        } catch (e) {
+            console.log('save doctor failed', e)
+            dispatch({
+                type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
+            })
+            toast.error("Save No THÀNH CÔNG 1 CHÁU");
         }
     }
 }

@@ -10,7 +10,6 @@ import { languages } from '../../../utils/constant';
 import 'react-markdown-editor-lite/lib/index.css';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-
 // Finish!
 
 
@@ -31,21 +30,23 @@ class manageDoctor extends Component {
     buildDataInputSelect = (inputData) => {
         let result = [];
         let { language } = this.props
-        if (inputData && inputData.lenght > 0) {
-            inputData.map((item, index) => {
-                let object = {};
-                let labelVi = `${item.lastName} ${item.firstName}`;
-                let labelEn = `${item.firstName} ${item.lastName}`;
-                object.label = language === languages.VI ? labelVi : labelEn
-                object.value = item.id
-                result.push(object)
-            })
-        }
+        inputData.map((item, index) => {
+            let object = {};
+            object.label = language === languages.VI ? `${item.lastName} ${item.firstName}` : `${item.firstName} ${item.lastName}`
+            object.value = item.id
+            result.push(object)
+        })
         return result;
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.allDoctor !== this.props.allDoctor) {
-            let dataSelect = this.buildDataInputSelect(this.props.allDoctor)
+        if (prevProps.listDoctor !== this.props.listDoctor) {
+            let dataSelect = this.buildDataInputSelect(this.props.listDoctor)
+            this.setState({
+                listDoctor: dataSelect
+            })
+        }
+        if (prevProps.language !== this.props.language) {
+            let dataSelect = this.buildDataInputSelect(this.props.listDoctor)
             this.setState({
                 listDoctor: dataSelect
             })
@@ -58,6 +59,12 @@ class manageDoctor extends Component {
         })
     }
     handleSaveContentMarkdown = () => {
+        this.props.saveDetailDoctor({
+            contentHTML: this.state.contentHtml,
+            contentMarkdown: this.state.contentMarkdown,
+            description: this.state.description,
+            doctorId: this.state.selectedOption.value,
+        })
     }
     handleChange = selectedOption => {
         this.setState({ selectedOption });
@@ -69,7 +76,7 @@ class manageDoctor extends Component {
         })
     }
     render() {
-        console.log('check steeeet', this.state)
+        console.log('check state ', this.state)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -114,7 +121,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllDoctor: (id) => dispatch(actions.fetchAllDoctor())
+        fetchAllDoctor: () => dispatch(actions.fetchAllDoctor()),
+        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctors(data))
     };
 };
 

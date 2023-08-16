@@ -51,7 +51,7 @@ class HomePage extends Component {
         };
         return (
             <div>
-                <HomeHeader />
+                <HomeHeader isShowBanner={true} />
                 <Sp1 settings={settings} />
                 <Sp2 settings={settings} />
                 <Sp3 settings={settings} />

@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl'
 import Slider from 'react-slick';
 import "../../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../../node_modules/slick-carousel/slick/slick-theme.css";
-import anh from "../../../assets/specialty/anh.jpg"
 import * as actions from '../../../store/actions'
 import { languages } from '../../../utils/constant';
+import { withRouter } from 'react-router';
 
 class Sp3 extends Component {
 
@@ -26,6 +26,11 @@ class Sp3 extends Component {
     }
     componentDidMount() {
         this.props.fetchTopDoctor()
+    }
+
+    handleViewDetailDoctor = (doctor) => {
+        console.log('check view', doctor)
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
     }
     render() {
         let arrDoctor = this.state.arrDoctor
@@ -49,7 +54,9 @@ class Sp3 extends Component {
                                 let nameVi = `${item.positionData.valueVi} ${item.lastName} ${item.firstName}`
                                 let nameEn = `${item.positionData.valueEn} ${item.firstName} ${item.lastName}`
                                 return (
-                                    <div className='img-nude set-1'><img src={imageBase64} className="imgg" key={index} /><p>{lang === languages.VI ? nameVi : nameEn}</p><b></b><p>Master deegree in healthy activities</p></div>
+                                    <div className='img-nude set-1'><img src={imageBase64} className="imgg" key={index} onClick={() => this.handleViewDetailDoctor(item)} />
+                                        <p>{lang === languages.VI ? nameVi : nameEn}</p>
+                                        <b></b><p>Master deegree in healthy activities</p></div>
                                 )
                             })
                             }
@@ -75,4 +82,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sp3);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sp3))

@@ -29,8 +29,9 @@ class Sp3 extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
-        console.log('check view', doctor)
-        this.props.history.push(`/detail-doctor/${doctor.id}`)
+        if (this.props.history) {
+            this.props.history.push(`/detail-doctor/${doctor.id}`)
+        }
     }
     render() {
         let arrDoctor = this.state.arrDoctor

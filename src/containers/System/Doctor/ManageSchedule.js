@@ -7,7 +7,10 @@ import * as actions from "../../../store/actions"
 import { languages } from '../../../utils/constant';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
+import { toast, Toast } from 'react-toastify';
 import './ManageSchedule.scss'
+import _, { result } from 'lodash';
+import { saveBulkSchedule } from '../../../services/userService';
 
 
 class DoctorSchedule extends Component {
@@ -17,7 +20,7 @@ class DoctorSchedule extends Component {
         this.state = {
             listDoctor: [],
             selectedDoctor: {},
-            today: '',
+            currentDate: '',
             dataTime: []
         }
     }
@@ -45,8 +48,16 @@ class DoctorSchedule extends Component {
             })
         }
         if (prevProps.dataTime !== this.props.dataTime) {
+            console.log('check ...', this.props.dataTime)
+            let data = this.props.dataTime
+            if (data) {
+                data.map(item => {
+                    item.isSelected = false
+                    return item
+                })
+            }
             this.setState({
-                dataTime: this.props.dataTime
+                dataTime: data
             })
         }
     }
@@ -55,13 +66,58 @@ class DoctorSchedule extends Component {
     };
     handleOnchangeDatepicker = (date) => {
         this.setState({
-            today: date[0]
+            currentDate: date[0]
         })
     }
+    handleClickBtnTime = (time) => {
+        let { dataTime } = this.state
+        if (dataTime && dataTime.length > 0) {
+            let data = dataTime.map(item => {
+                if (item.id === time.id) item.isSelected = !item.isSelected
+                return item
+            })
+            this.setState({
+                dataTime: dataTime
+            })
+        }
+    }
+    handleSaveSchedule = async () => {
+        let { dataTime, selectedDoctor, currentDate } = this.state
+        let result = []
+        if (!currentDate) {
+            toast.error('Invalid date')
+            return;
+        }
+        if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+            toast.error('missing doctor')
+            return;
+        }
+        let Formatdate = moment(currentDate).format("DD/MM/YYYY")
+        if (dataTime && dataTime.length > 0) {
+            let selectedTime = dataTime.filter(item => item.isSelected === true)
+            if (selectedTime && selectedTime.length > 0) {
+                selectedTime.map((item, index) => {
+                    let object = {}
+                    object.doctorId = selectedDoctor.value;
+                    object.date = Formatdate;
+                    object.timeType = item.keyMap;
+                    result.push(object)
+                })
+            } else {
+                toast.error('missing time range')
+                return;
+            }
+        }
+        let res = await saveBulkSchedule({
+            arr: result
+        })
+        console.log('checkk result', result)
+        console.log('checkk ressss', res)
+    }
     render() {
-        console.log('check state', this.state)
-        let { dataTime } = this.props
+        let { dataTime } = this.state
         let { language } = this.props
+        console.log('checkk shit', dataTime)
         return (
             <div className='manage-schedule-container'>
                 <div className='m-s-title'>
@@ -82,21 +138,28 @@ class DoctorSchedule extends Component {
                             <DatePicker
                                 onChange={this.handleOnchangeDatepicker}
                                 className="form-control"
-                                value={this.state.today}
+                                value={this.state.currentDate}
                                 minDate={new Date()}
                             />
                         </div>
                         <div className='col-12 pick-hour-container'>
                             {dataTime && dataTime.map((item, index) => {
                                 return (
-                                    <button className='btn' key='index'>
+                                    <button
+                                        className={item.isSelected === true ? 'btn btn-schedule active' : 'btn btn-schedule'} key={index}
+                                        onClick={() => this.handleClickBtnTime(item)}
+                                    >
                                         {language === languages.VI ? item.valueVi : item.valueEn}
                                     </button>
                                 )
                             })}
                         </div>
                         <div className='col-12'>
-                            <button className='btn btn-primary btn-save-schedule'><FormattedMessage id="manage-schedule.save-info" /></button>
+                            <button
+                                onClick={() => this.handleSaveSchedule()}
+                                className='btn btn-primary btn-save-schedule'>
+                                <FormattedMessage id="manage-schedule.save-info" />
+                            </button>
                         </div>
                     </div>
                 </div>

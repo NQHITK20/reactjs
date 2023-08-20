@@ -57,5 +57,11 @@
     "homepage": {
         "best-doc": "Out standing Doctor",
         "more": "More info"
+    },
+    "manage-schedule": {
+        "title": "Manage Doctor Schedule",
+        "choose-dr": "choose doctor",
+        "choose-date": "choose date",
+        "save-info": "Save info"
     }
 }

@@ -36,8 +36,6 @@ class Login extends Component {
         this.setState({
             errMessage: ''
         })
-        console.log('username :', this.state.username, 'password :', this.state.password)
-        console.log('state :', this.state)
         try {
             let data = await handlerLoginApi(this.state.username, this.state.password)
             if (data && data.errCode !== 0) {
@@ -47,7 +45,6 @@ class Login extends Component {
             }
             if (data && data.errCode == 0) {
                 this.props.userLoginLotkhe(data.user)
-                console.log('lọt khe')
             }
         } catch (error) {
             if (error.response) {
@@ -67,6 +64,12 @@ class Login extends Component {
             isEye: !this.state.isEye
         })
     }
+    handKeydown = (event) => {
+        console.log('check event', event)
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            this.handleLogin()
+        }
+    }
     render() {
         //jsx
         return (
@@ -85,9 +88,11 @@ class Login extends Component {
                         <div className='col-12 form-group login-input'>
                             <label>Password</label>
                             <div className='custom-input-password'>
-                                <input type={this.state.isEye ? 'text' : 'password'} className='form-control'
+                                <input type={this.state.isEye ? 'text' : 'password'}
+                                    className='form-control'
                                     onChange={(event) => { this.handleOnchangePassword(event) }}
                                     placeholder='Enter your password'
+                                    onKeyDown={(event) => this.handKeydown(event)}
                                 />
                                 <span onClick={() => { this.handlerEyes() }}>
 

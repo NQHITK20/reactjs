@@ -92,7 +92,7 @@ class DoctorSchedule extends Component {
             toast.error('missing doctor')
             return;
         }
-        let Formatdate = moment(currentDate).format("DD/MM/YYYY")
+        let Formatdate = new Date(currentDate).getTime()
         if (dataTime && dataTime.length > 0) {
             let selectedTime = dataTime.filter(item => item.isSelected === true)
             if (selectedTime && selectedTime.length > 0) {
@@ -109,7 +109,9 @@ class DoctorSchedule extends Component {
             }
         }
         let res = await saveBulkSchedule({
-            arr: result
+            arr: result,
+            doctorId: selectedDoctor.value,
+            Formatdate: Formatdate
         })
         console.log('checkk result', result)
         console.log('checkk ressss', res)

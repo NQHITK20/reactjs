@@ -10,7 +10,8 @@ class doctorSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allDays: []
+            allDays: [],
+            allAvailableTime: [],
         }
     }
     setArrDays = (language) => {
@@ -18,7 +19,8 @@ class doctorSchedule extends Component {
         for (let i = 0; i < 7; i++) {
             let object = {};
             if (language === languages.VI) {
-                object.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM')
+                let laybeovei = moment(new Date()).add(i, 'days').format('dddd - DD/MM')
+                object.label = this.inHoa(laybeovei)
             } else {
                 object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM')
 
@@ -46,20 +48,32 @@ class doctorSchedule extends Component {
             let id = this.props.idFromParent
             let date = event.target.value
             let res = await getScheduleDoctor(id, date)
+            let allTime = []
+            if (res && res.errCode == -0) {
+                this.setState({
+                    allAvailableTime: res.data ? res.data : []
+                })
+            }
             console.log('check res', res)
         }
     }
+    inHoa(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
     render() {
-        let { allDays } = this.state
+        let { allDays, allAvailableTime } = this.state
+        let { language } = this.props
         return (
             <div className='doctor-schedule-container'>
                 <div className='all-schedule'>
                     <select onChange={(event) => this.onChangeSelect(event)}>
-                        {allDays && allDays.length > 0 && allDays.map((item, index) => {
-                            return <option value={item.value} key={index}>
-                                {item.label}
-                            </option>
-                        })}
+                        {allDays && allDays.length > 0 &&
+                            allDays.map((item, index) => {
+                                return (<option value={item.value} key={index}>
+                                    {item.label}
+                                </option>)
+                            })
+                        }
                     </select>
                 </div>
                 <div className='all-available-time'>
@@ -67,9 +81,14 @@ class doctorSchedule extends Component {
                         <i className='fas fa-calendar-alt'><span>Lịch khám</span></i>
                     </div>
                     <div className='time-content'>
-                        <button>8-9</button>
-                        <button>8-9</button>
-                        <button>8-9</button>
+                        {allAvailableTime && allAvailableTime.length > 0 ?
+                            allAvailableTime.map((item, index) => {
+                                let shit = language === languages.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
+                                return (
+                                    <button key={index}>{shit}</button>
+                                )
+                            }) : <div>FUCKKKKKKKK TIME</div>
+                        }
                     </div>
                 </div>
             </div>

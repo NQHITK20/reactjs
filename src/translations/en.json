@@ -63,5 +63,13 @@
         "choose-dr": "choose doctor",
         "choose-date": "choose date",
         "save-info": "Save info"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Schedule",
+            "fucktime": "FUCKKKKKK TIME",
+            "choose": "choose",
+            "andfuckfree": " and fuck (free)"
+        }
     }
 }

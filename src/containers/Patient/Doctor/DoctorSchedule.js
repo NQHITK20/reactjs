@@ -5,6 +5,7 @@ import moment from 'moment';
 import localization from 'moment/locale/vi'
 import { getScheduleDoctor } from '../../../services/userService';
 import { languages } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 
 class doctorSchedule extends Component {
     constructor(props) {
@@ -19,42 +20,70 @@ class doctorSchedule extends Component {
         for (let i = 0; i < 7; i++) {
             let object = {};
             if (language === languages.VI) {
-                let laybeovei = moment(new Date()).add(i, 'days').format('dddd - DD/MM')
-                object.label = this.inHoa(laybeovei)
+                if (i === 0) {
+                    let laybeoshittvei = moment(new Date()).format('DD/MM')
+                    laybeoshittvei = this.inHoa(laybeoshittvei)
+                    let today = `Hôm nay - ${laybeoshittvei}`
+                    object.label = today
+                }
+                else {
+                    let laybeovei = moment(new Date()).add(i, 'days').format('dddd - DD/MM')
+                    object.label = this.inHoa(laybeovei)
+                }
             } else {
-                object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM')
-
+                if (i === 0) {
+                    let lay = moment(new Date()).format('DD/MM')
+                    let today = `Today - ${lay}`
+                    object.label = today
+                } else {
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd-DD/MM')
+                }
             }
-            object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf()
+            object.value = moment(new Date()).add(i, 'days').startOf('days').valueOf()
             allDayszz.push(object)
-        }
 
-        this.setState({
-            allDays: allDayszz
-        })
+        }
+        return allDayszz
     }
     async componentDidMount() {
         let { language } = this.props
-        this.setArrDays(language)
+        let allShit = this.setArrDays(language)
+        this.setState({
+            allDays: allShit,
+        })
     }
 
-    componentDidUpdate(prevProps, preSate, snapshot) {
+    async componentDidUpdate(prevProps, preSate, snapshot) {
         if (this.props.language !== prevProps.language) {
-            this.setArrDays(this.props.language)
+            let allShit = this.setArrDays(this.props.language)
+            this.setState({
+                allDays: allShit
+            })
         }
+        if (this.props.allAvailableTime !== prevProps.allAvailableTime) {
+            this.setState({
+                allAvailableTime: this.props.allAvailableTime
+            })
+        }
+        if (this.props.idFromParent !== prevProps.idFromParent) {
+            let allShit = this.setArrDays(this.props.language)
+            let res = await getScheduleDoctor(this.props.idFromParent, allShit[0].value)
+            this.setState({
+                allAvailableTime: res.data ? res.data : []
+            })
+        }
+
     }
     onChangeSelect = async (event) => {
         if (this.props.idFromParent && this.props.idFromParent !== -1) {
             let id = this.props.idFromParent
             let date = event.target.value
             let res = await getScheduleDoctor(id, date)
-            let allTime = []
-            if (res && res.errCode == -0) {
+            if (res && res.errCode === 0) {
                 this.setState({
                     allAvailableTime: res.data ? res.data : []
                 })
             }
-            console.log('check res', res)
         }
     }
     inHoa(string) {
@@ -63,6 +92,7 @@ class doctorSchedule extends Component {
     render() {
         let { allDays, allAvailableTime } = this.state
         let { language } = this.props
+        console.log('check avail', this.state.allAvailableTime)
         return (
             <div className='doctor-schedule-container'>
                 <div className='all-schedule'>
@@ -78,16 +108,28 @@ class doctorSchedule extends Component {
                 </div>
                 <div className='all-available-time'>
                     <div className='text-calender'>
-                        <i className='fas fa-calendar-alt'><span>Lịch khám</span></i>
+                        <i className='fas fa-calendar-alt'><span><FormattedMessage id='patient.detail-doctor.schedule' /></span></i>
                     </div>
                     <div className='time-content'>
                         {allAvailableTime && allAvailableTime.length > 0 ?
-                            allAvailableTime.map((item, index) => {
-                                let shit = language === languages.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
-                                return (
-                                    <button key={index}>{shit}</button>
-                                )
-                            }) : <div>FUCKKKKKKKK TIME</div>
+                            <>
+                                <div className='time-content-btns'>
+                                    {allAvailableTime.map((item, index) => {
+                                        let shit = language === languages.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
+                                        return (
+                                            <button key={index} className={language === languages.VI ? 'btn-vn' : 'btn btn-en'}>{shit}</button>
+                                        )
+
+                                    })}
+                                </div>
+
+                                <div className='book-free'>
+                                    <FormattedMessage id='patient.detail-doctor.choose' /> <i className='far fa-hand-point-up' /><FormattedMessage id='patient.detail-doctor.andfuckfree' />
+                                </div>
+                            </>
+
+                            :
+                            <div className='no-schedule'><FormattedMessage id='patient.detail-doctor.fucktime' /></div>
                         }
                     </div>
                 </div>

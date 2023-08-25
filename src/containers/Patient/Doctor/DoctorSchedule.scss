@@ -33,24 +33,43 @@
         }
 
         .time-content {
-            display  : flex;
-            gap      : 15px;
-            flex-wrap: wrap;
 
-            button {
-                padding         : 8px 10px;
-                border          : none;
-                outline         : none;
-                background-color: #fff04b;
-                min-width       : 120px;
-                border-radius   : 3px;
-                font-weight     : 550;
-                color           : #333;
+            .time-content-btns {
+                display  : flex;
+                gap      : 15px;
+                flex-wrap: wrap;
 
-                &:hover {
-                    background-color: #45c3d2;
-                    color           : antiquewhite;
+                button {
+                    padding         : 8px 10px;
+                    border          : none;
+                    outline         : none;
+                    background-color: #fff04b;
+                    border-radius   : 3px;
+                    font-weight     : 550;
+                    color           : #333;
+
+                    &:hover {
+                        background-color: #45c3d2;
+                        color           : antiquewhite;
+                    }
                 }
+
+                .btn-vn {
+                    min-width: 120px;
+                }
+
+                .btn-en {
+                    min-width: 155px;
+                }
+
+                .no-schedule {
+                    font-style: italic;
+                    font-size : 15px;
+                }
+            }
+
+            .book-free {
+                margin-top: 10px;
             }
         }
     }

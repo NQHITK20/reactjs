@@ -71,5 +71,20 @@
             "choose": "chọn ",
             "andfuckfree": " và khám (miễn phí)"
         }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Tạo thêm thông tin bác sĩ",
+            "title2": "Chọn bác sĩ",
+            "title3": "Thông tin giới thiệu",
+            "save": "Xác nhận lưu",
+            "create": "Tạo thông tin",
+            "shit1": "Chọn giá",
+            "shit2": "Chọn phương thức thanh toán",
+            "shit3": "Chọn tỉnh thành",
+            "shit4": "Tên phòng khám",
+            "shit5": "Địa chỉ phòng khám",
+            "shit6": "Lưu ý"
+        }
     }
 }

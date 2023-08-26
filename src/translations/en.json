@@ -68,8 +68,23 @@
         "detail-doctor": {
             "schedule": "Schedule",
             "fucktime": "FUCKKKKKK TIME",
-            "choose": "choose",
+            "choose": "choose ",
             "andfuckfree": " and fuck (free)"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create doctor info",
+            "title2": "Choose porn star",
+            "title3": "More info <3",
+            "save": "Save",
+            "create": "Create",
+            "shit1": "price",
+            "shit2": "payment method",
+            "shit3": "State",
+            "shit4": "clinic",
+            "shit5": "clinic address",
+            "shit6": "note"
         }
     }
 }

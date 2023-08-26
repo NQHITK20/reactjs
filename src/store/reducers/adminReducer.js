@@ -7,7 +7,9 @@ const initialState = {
     users: [],
     topDoctor: [],
     allDoctor: [],
-    dataTime: ''
+    dataTime: '',
+    allRequiredDoctorInfo: [],
+
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -95,8 +97,17 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-
-
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS:
+            state.data = action.data;
+            console.log('check action', action)
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED:
+            state.data = [];
+            return {
+                ...state,
+            }
 
         default:
             return state;

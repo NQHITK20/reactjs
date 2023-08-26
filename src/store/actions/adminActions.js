@@ -291,3 +291,40 @@ export const fetchAllScheduleHourDoctor = () => {
         }
     }
 }
+
+export const getRequiredDoctorInfo = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START, })
+            let resPrice = await getAllcode2("PRICE");
+            let resPayment = await getAllcode2("PAYMENT");
+            let resProvince = await getAllcode2("PROVINCE");
+            if (resPrice && resPrice.errCode === 0 &&
+                resPayment && resPayment.errCode === 0 &&
+                resProvince && resProvince.errCode === 0) {
+                let data = {
+                    resPrice: resPrice.data,
+                    resPayment: resPayment.data,
+                    resProvince: resProvince.data,
+                }
+                dispatch(fetchRequiredDoctorInfoSuccess(data));
+            } else {
+                toast.error("fetchRequiredDoctorInfo HỤT 1 CHÁU");
+                dispatch(fetchRequiredDoctorInfoFailed());
+            }
+        } catch (e) {
+            toast.error("Update HỤT 1 CHÁU");
+            dispatch(fetchRequiredDoctorInfoFailed())
+            console.log("edit user failed err", e)
+        }
+    }
+}
+
+export const fetchRequiredDoctorInfoSuccess = (data) => ({
+    type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS,
+    data: data
+})
+
+export const fetchRequiredDoctorInfoFailed = () => ({
+    type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED,
+})

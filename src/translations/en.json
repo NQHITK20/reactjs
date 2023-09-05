@@ -70,6 +70,13 @@
             "fucktime": "FUCKKKKKK TIME",
             "choose": "choose ",
             "andfuckfree": " and fuck (free)"
+        },
+        "extra-info-doctor": {
+            "text-address": "Adress",
+            "price": "PRICE",
+            "detail": "Detail",
+            "payment": "All payment method",
+            "hide": "Hide"
         }
     },
     "admin": {

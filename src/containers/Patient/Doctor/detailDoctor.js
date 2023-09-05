@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import Home from '../../../routes/Home';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './detailDoctor.scss'
 import { getInfoDoctor } from '../../../services/userService';
 import { languages } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorExtraInfo from './DoctorExtraInfo';
 
 class detailDoctor extends Component {
     constructor(props) {
@@ -66,7 +66,8 @@ class detailDoctor extends Component {
                                 idFromParent={this.state.currentDoctorId} />
                         </div>
                         <div className='content-right'>
-
+                            <DoctorExtraInfo
+                                idFromParent={this.state.currentDoctorId} />
                         </div>
                     </div>
                     <div className='detail-info-doctor'>

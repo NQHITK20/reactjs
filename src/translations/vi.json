@@ -70,6 +70,13 @@
             "fucktime": "Bác sĩ bận đi đ* r",
             "choose": "chọn ",
             "andfuckfree": " và khám (miễn phí)"
+        },
+        "extra-info-doctor": {
+            "text-address": "Địa chỉ khám",
+            "price": "GIÁ KHÁM",
+            "detail": "Xem chi tiết",
+            "payment": "Các hình thức chi trả",
+            "hide": "Ẩn bớt"
         }
     },
     "admin": {

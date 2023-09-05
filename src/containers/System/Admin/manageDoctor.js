@@ -144,13 +144,44 @@ class manageDoctor extends Component {
     }
     handleChange = async (selectedOption) => {
         this.setState({ selectedOption });
+        let { listPayment, listPrice, listProvince } = this.state
         let res = await getInfoDoctor(selectedOption.value)
         if (res && res.errCode === 0 && res.data && res.data.markdown) {
             let markdown = res.data.markdown
+
+            let addressClinic = '', nameClinic = '', note = '',
+                paymentId = '', priceId = '', provinceId = '',
+                selectPayment = '', selectPrice = '', selectProvince = ''
+
+            if (res.data.doctor_info) {
+                addressClinic = res.data.doctor_info.addressClinic
+                nameClinic = res.data.doctor_info.nameClinic
+                note = res.data.doctor_info.note
+                paymentId = res.data.doctor_info.paymentId
+                priceId = res.data.doctor_info.priceId
+                provinceId = res.data.doctor_info.provinceId
+
+
+                selectPayment = listPayment.find(item => {
+                    return item && item.value === paymentId
+                })
+                selectPrice = listPrice.find(item => {
+                    return item && item.value === priceId
+                })
+                selectProvince = listProvince.find(item => {
+                    return item && item.value === provinceId
+                })
+            }
             this.setState({
                 contentHTML: markdown.contentHTML,
                 contentMarkdown: markdown.contentMarkdown,
                 description: markdown.description,
+                addressClinic: addressClinic,
+                nameClinic: nameClinic,
+                note: note,
+                selectPayment: selectPayment,
+                selectPrice: selectPrice,
+                selectProvince: selectProvince
             })
         }
         if (!res.data.markdown.contentHTML) {
@@ -171,7 +202,45 @@ class manageDoctor extends Component {
                 hasOldData: false
             })
         }
-        if (res.data.markdown.description && res.data.markdown.contentMarkdown && res.data.markdown.contentHTML) {
+        if (!res.data.doctor_info.addressClinic) {
+            this.setState({
+                addressClinic: '',
+                hasOldData: false
+            })
+        }
+        if (!res.data.doctor_info.nameClinic) {
+            this.setState({
+                nameClinic: '',
+                hasOldData: false
+            })
+        }
+        if (!res.data.doctor_info.note) {
+            this.setState({
+                note: '',
+                hasOldData: false
+            })
+        }
+        if (!res.data.doctor_info.paymentId) {
+            this.setState({
+                paymentId: '',
+                hasOldData: false
+            })
+        }
+        if (!res.data.doctor_info.priceId) {
+            this.setState({
+                priceId: '',
+                hasOldData: false
+            })
+        }
+        if (!res.data.doctor_info.provinceId) {
+            this.setState({
+                provinceId: '',
+                hasOldData: false
+            })
+        }
+        if (res.data.markdown.description && res.data.markdown.contentMarkdown && res.data.markdown.contentHTML
+            && res.data.doctor_info.addressClinic && res.data.doctor_info.nameClinic && res.data.doctor_info.note
+            && res.data.doctor_info.paymentId && res.data.doctor_info.priceId && res.data.doctor_info.provinceId) {
             this.setState({
                 hasOldData: true
             })

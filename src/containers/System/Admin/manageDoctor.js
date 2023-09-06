@@ -93,7 +93,7 @@ class manageDoctor extends Component {
         }
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect(this.props.listDoctor, 'USERS')
-            let { resPrice, resPayment, resProvince } = this.props.data
+            let { resPrice, resPayment, resProvince } = this.props
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE')
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT')
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE')

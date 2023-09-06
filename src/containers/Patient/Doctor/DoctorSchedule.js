@@ -6,6 +6,8 @@ import localization from 'moment/locale/vi'
 import { getScheduleDoctor } from '../../../services/userService';
 import { languages } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
+import BookingModal from './Modal/BookingModal';
+
 
 class doctorSchedule extends Component {
     constructor(props) {
@@ -13,6 +15,8 @@ class doctorSchedule extends Component {
         this.state = {
             allDays: [],
             allAvailableTime: [],
+            isOpenModalBooking: false,
+            dataShit: {}
         }
     }
     setArrDays = (language) => {
@@ -89,51 +93,70 @@ class doctorSchedule extends Component {
     inHoa(string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
+    handleClickScheduleTime = (time) => {
+        this.setState({
+            isOpenModalBooking: true,
+            dataShit: time
+        })
+    }
+    closeFuckingModal = () => {
+        this.setState({
+            isOpenModalBooking: false
+        })
+    }
     render() {
-        let { allDays, allAvailableTime } = this.state
+        let { allDays, allAvailableTime, isOpenModalBooking, dataShit } = this.state
         let { language } = this.props
-        console.log('check avail', this.state.allAvailableTime)
         return (
-            <div className='doctor-schedule-container'>
-                <div className='all-schedule'>
-                    <select onChange={(event) => this.onChangeSelect(event)}>
-                        {allDays && allDays.length > 0 &&
-                            allDays.map((item, index) => {
-                                return (<option value={item.value} key={index}>
-                                    {item.label}
-                                </option>)
-                            })
-                        }
-                    </select>
-                </div>
-                <div className='all-available-time'>
-                    <div className='text-calender'>
-                        <i className='fas fa-calendar-alt'><span><FormattedMessage id='patient.detail-doctor.schedule' /></span></i>
+            <>
+                <div className='doctor-schedule-container'>
+                    <div className='all-schedule'>
+                        <select onChange={(event) => this.onChangeSelect(event)}>
+                            {allDays && allDays.length > 0 &&
+                                allDays.map((item, index) => {
+                                    return (<option value={item.value} key={index}>
+                                        {item.label}
+                                    </option>)
+                                })
+                            }
+                        </select>
                     </div>
-                    <div className='time-content'>
-                        {allAvailableTime && allAvailableTime.length > 0 ?
-                            <>
-                                <div className='time-content-btns'>
-                                    {allAvailableTime.map((item, index) => {
-                                        let shit = language === languages.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
-                                        return (
-                                            <button key={index} className={language === languages.VI ? 'btn-vn' : 'btn btn-en'}>{shit}</button>
-                                        )
+                    <div className='all-available-time'>
+                        <div className='text-calender'>
+                            <i className='fas fa-calendar-alt'><span><FormattedMessage id='patient.detail-doctor.schedule' /></span></i>
+                        </div>
+                        <div className='time-content'>
+                            {allAvailableTime && allAvailableTime.length > 0 ?
+                                <>
+                                    <div className='time-content-btns'>
+                                        {allAvailableTime.map((item, index) => {
+                                            let shit = language === languages.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
+                                            return (
+                                                <button key={index}
+                                                    className={language === languages.VI ? 'btn-vn' : 'btn btn-en'}
+                                                    onClick={() => this.handleClickScheduleTime(item)}
+                                                >{shit}</button>
+                                            )
 
-                                    })}
-                                </div>
+                                        })}
+                                    </div>
 
-                                <div className='book-free'>
-                                    <FormattedMessage id='patient.detail-doctor.choose' /> <i className='far fa-hand-point-up' /><FormattedMessage id='patient.detail-doctor.andfuckfree' />
-                                </div>
-                            </>
-
-                            :
-                            <div className='no-schedule'><FormattedMessage id='patient.detail-doctor.fucktime' /></div>
-                        }
+                                    <div className='book-free'>
+                                        <FormattedMessage id='patient.detail-doctor.choose' /> <i className='far fa-hand-point-up' /><FormattedMessage id='patient.detail-doctor.andfuckfree' />
+                                    </div>
+                                </>
+                                :
+                                <div className='no-schedule'><FormattedMessage id='patient.detail-doctor.fucktime' /></div>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+                <BookingModal
+                    isOpenModal={isOpenModalBooking}
+                    closeFuckingModal={this.closeFuckingModal}
+                    dataShit={dataShit}
+                />
+            </>
         );
     }
 }

@@ -40,7 +40,6 @@ class DoctorExtraInfo extends Component {
     render() {
         let { isShowCuInfo, exTraInfo } = this.state
         let { language } = this.props
-        console.log('check state 22', this.state)
         return (
             <div className='doctor-extra-info-container'>
                 <div className='content-up'>

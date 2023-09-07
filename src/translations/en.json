@@ -77,6 +77,20 @@
             "detail": "Detail",
             "payment": "All payment method",
             "hide": "Hide"
+        },
+        "booking-modal": {
+            "title": "Schedule info",
+            "fullname": "Full name",
+            "phonenumber": "Phone number",
+            "email": "Email",
+            "address": "Adress",
+            "reason": "Reason",
+            "birthday": "Birthday",
+            "sex": "Sex",
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "intro": "Free bl*wjob",
+            "price": "PRICE "
         }
     },
     "admin": {

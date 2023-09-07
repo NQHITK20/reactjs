@@ -38,21 +38,6 @@ class UserRedux extends Component {
     }
 
     async componentDidMount() {
-        // return new Promise(async (resolve, reject) => {
-        //     try {
-        //         let res = await getAllcode2('gender');
-        //         if (res && res.errCode === 0) {
-        //             this.setState({
-        //                 genderArr: res.data
-        //             })
-        //         } else {
-
-        //         }
-        //         resolve(res)
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        // })
 
         this.props.getGenderStart();
         this.props.getPotitionStart();

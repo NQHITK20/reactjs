@@ -1,4 +1,7 @@
 .booking-modal-container {
+    padding         : 40px;
+    background-color: floralwhite;
+
     .booking-modal-content {
         display       : flex;
         flex-direction: column;
@@ -19,13 +22,14 @@
         }
 
         .booking-modal-body {
-            height : 100%;
-            padding: 15px;
+            border-top: 1px solid #ccc;
+            height    : 100%;
+            padding   : 15px;
         }
 
         .booking-modal-footer {
             padding        : 10px;
-            border-top     : 1px solid green;
+            border-top     : 1px solid #ccc;
             display        : flex;
             justify-content: flex-end;
             gap            : 15px;

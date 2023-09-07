@@ -47,8 +47,12 @@ const getProfileById = (doctorId) => {
     return axios.get(`/api/get-profile-by-id?doctorId=${doctorId}`)
 }
 
+const postPatientBookAppointment = (data) => {
+    return axios.post(`/api/patient-book-appointment`, data)
+}
+
 export {
-    handlerLoginApi, getAllUsers, getExtraInfoById,
+    handlerLoginApi, getAllUsers, getExtraInfoById, postPatientBookAppointment,
     createUser, deleteUserService, getProfileById,
     editUserService, getAllcode2, getTopDoctorHome,
     getAllDoctor, saveDetailDoctor, getInfoDoctor, saveBulkSchedule, getScheduleDoctor

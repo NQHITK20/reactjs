@@ -11,6 +11,8 @@ import * as actions from "../../../../store/actions"
 import Select from 'react-select';
 import { postPatientBookAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
+import moment from 'moment';
+
 
 class BookingModal extends Component {
     constructor(props) {
@@ -91,6 +93,8 @@ class BookingModal extends Component {
     handleConfirmFucking = async () => {
         //validate input
         let date = new Date(this.state.birthday).getTime()
+        let timeString = this.buildTimeBooking(this.props.dataShit)
+        let doctorName = this.buildDoctorName(this.props.dataShit)
 
         let res = await postPatientBookAppointment({
             fullName: this.state.fullName,
@@ -102,6 +106,9 @@ class BookingModal extends Component {
             selectedGender: this.state.selectedGender.value,
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
+            language: this.props.language,
+            timeString: timeString,
+            doctorName: doctorName
         })
         if (res && res.errCode === 0) {
             toast.success('booking a new appointment success!')
@@ -109,7 +116,29 @@ class BookingModal extends Component {
         } else {
             toast.error('booking a new appointment falied!')
         }
-        console.log('lọt khe', this.state)
+    }
+    buildTimeBooking = (data) => {
+        let { language } = this.props
+        if (data && !_.isEmpty(data)) {
+            let time = language === languages.VI ? data.timeTypeData.valueVi : data.timeTypeData.valueEn
+            let date = language === languages.VI ?
+                moment.unix(+data.date / 1000).format('dddd - DD/MM/YYYY')
+                :
+                moment.unix(+data.date / 1000).format('dddd - MM/DD/YYYY')
+            // moment.unix(+data.dat / 1000).locale('en').format('ddd - MM/DD/YYYY')
+            return `${time} - ${date}`
+        }
+        return ''
+    }
+    buildDoctorName = (datashit) => {
+        let { language } = this.props
+        if (datashit && !_.isEmpty(datashit)) {
+            let name = language === languages.VI ? `${datashit.doctorData.lastName}  ${datashit.doctorData.firstName}` : `${datashit.doctorData.firstName}  ${datashit.doctorData.lastName}`
+
+
+            return name
+        }
+        return ''
     }
     render() {
         let { isOpenModal, closeFuckingModal, dataShit } = this.props
@@ -118,7 +147,7 @@ class BookingModal extends Component {
             doctorId = dataShit.doctorId
         }
 
-        console.log('check state', this.state)
+        console.log('check datashit', dataShit)
         return (
             <Modal isOpen={isOpenModal}
                 className={'booking-modal-container'}

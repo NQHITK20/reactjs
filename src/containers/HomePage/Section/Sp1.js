@@ -2,30 +2,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
+import { FormattedMessage } from 'react-intl';
 import "../../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../../node_modules/slick-carousel/slick/slick-theme.css";
-import anh from "../../../assets/specialty/anh.jpg"
-
+import { getAllSpecialty } from '../../../services/userService';
 
 class Sp1 extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            data: []
+        }
+    }
+    async componentDidMount() {
+        let res = await getAllSpecialty()
+        console.log('check res', res)
+        if (res && res.errCode === 0) {
+            this.setState({
+                data: res.data ? res.data : []
+            })
+        }
+    }
     render() {
-
+        let { data } = this.state
         return (
             <div className='section-Sp sp-1'>
                 <div className='Sp-content'>
                     <div className='Sp-header'>
-                        <span className='sp-title'>Chuyên khoa phổ biến</span>
-                        <button className='sp-btn'>XEM THÊM</button>
+                        <span className='sp-title'><FormattedMessage id="homepage.specialty" /></span>
+                        <button className='sp-btn'><FormattedMessage id="homepage.more" /></button>
                     </div>
+                    {/* key={index} style={{ backgroundImage: `url(${item.image})` }} */}
                     <div className='Sp-body'>
                         <Slider {...this.props.settings}>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
+                            {data && data.length > 0 && data.map((item, index) => {
+                                return (<div className='img-nude' key={index}><img src={item.image} />
+                                    <p>{item.name}</p>
+                                </div>)
+                            })}
                         </Slider>
                     </div>
                 </div>

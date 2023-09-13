@@ -36,7 +36,7 @@ class Sp3 extends Component {
     render() {
         let arrDoctor = this.state.arrDoctor
         let { lang } = this.props
-        console.log('check arrDt', arrDoctor)
+        console.log('check shit 22', arrDoctor)
         // arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor)
         return (
             <div className='section-Sp sp-3'>

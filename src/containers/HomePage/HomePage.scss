@@ -34,7 +34,7 @@
         .Sp-body {
 
             .img-nude {
-                height: 300px;
+                height: 100%;
                 cursor: pointer;
             }
 
@@ -53,6 +53,15 @@
     &.sp-1 {
         background   : #f5f5f5;
         border-bottom: 3px solid #efeef5;
+
+        p {
+            padding-top: 10px;
+
+            :hover {
+                color: blue;
+            }
+        }
+
     }
 
     &.sp-3 {

@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import {
     getAllcode2, createUser, getAllUsers,
     deleteUserService, editUserService, getTopDoctorHome,
-    getAllDoctor, saveDetailDoctor
+    getAllDoctor, saveDetailDoctor, getAllSpecialty
 } from '../../services/userService';
 import { toast } from "react-toastify";
 
@@ -296,16 +296,21 @@ export const getRequiredDoctorInfo = (data) => {
     return async (dispatch, getState) => {
         try {
             dispatch({ type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START, })
+
             let resPrice = await getAllcode2("PRICE");
             let resPayment = await getAllcode2("PAYMENT");
             let resProvince = await getAllcode2("PROVINCE");
+            let resSpecialty = await getAllSpecialty()
+
             if (resPrice && resPrice.errCode === 0 &&
                 resPayment && resPayment.errCode === 0 &&
-                resProvince && resProvince.errCode === 0) {
+                resProvince && resProvince.errCode === 0 &&
+                resSpecialty && resSpecialty.errCode === 0) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
                     resProvince: resProvince.data,
+                    resSpecialty: resSpecialty.data,
                 }
                 dispatch(fetchRequiredDoctorInfoSuccess(data));
             } else {

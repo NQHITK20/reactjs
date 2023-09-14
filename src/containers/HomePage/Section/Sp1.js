@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import "../../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../../node_modules/slick-carousel/slick/slick-theme.css";
 import { getAllSpecialty } from '../../../services/userService';
+import { withRouter } from 'react-router';
 
 class Sp1 extends Component {
     constructor(props) {
@@ -23,6 +24,11 @@ class Sp1 extends Component {
             })
         }
     }
+    handleViewDetailSpecialty = (item) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-specialty/${item.id}`)
+        }
+    }
     render() {
         let { data } = this.state
         return (
@@ -32,11 +38,12 @@ class Sp1 extends Component {
                         <span className='sp-title'><FormattedMessage id="homepage.specialty" /></span>
                         <button className='sp-btn'><FormattedMessage id="homepage.more" /></button>
                     </div>
-                    {/* key={index} style={{ backgroundImage: `url(${item.image})` }} */}
                     <div className='Sp-body'>
                         <Slider {...this.props.settings}>
                             {data && data.length > 0 && data.map((item, index) => {
-                                return (<div className='img-nude' key={index}><img src={item.image} />
+                                return (<div className='img-nude' key={index}
+                                    onClick={() => this.handleViewDetailSpecialty(item)}
+                                ><img src={item.image} />
                                     <p>{item.name}</p>
                                 </div>)
                             })}
@@ -44,7 +51,6 @@ class Sp1 extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 
@@ -62,4 +68,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sp1);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sp1));

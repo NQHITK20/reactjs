@@ -106,7 +106,9 @@
             "shit3": "Chọn tỉnh thành",
             "shit4": "Tên phòng khám",
             "shit5": "Địa chỉ phòng khám",
-            "shit6": "Lưu ý"
+            "shit6": "Lưu ý",
+            "specialty": "Chuyên khoa",
+            "clinic": "Phòng khám"
         }
     }
 }

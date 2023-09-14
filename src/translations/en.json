@@ -106,7 +106,9 @@
             "shit3": "State",
             "shit4": "clinic",
             "shit5": "clinic address",
-            "shit6": "note"
+            "shit6": "note",
+            "specialty": "Specialty",
+            "clinic": "Clinic"
         }
     }
 }

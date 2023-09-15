@@ -141,6 +141,21 @@ class manageDoctor extends Component {
 
             })
         }
+        // if (prevState.selectedOption !== this.state.selectedOption) {
+
+        //     this.setState({
+        //         contentHTML: this.state.contentHTML,
+        //         contentMarkdown: this.state.contentMarkdown,
+        //         description: this.state.description,
+        //         addressClinic: this.state.addressClinic,
+        //         nameClinic: this.state.nameClinic,
+        //         note: this.state.note,
+        //         selectPayment: this.state.selectPayment,
+        //         selectPrice: this.state.selectPrice,
+        //         selectProvince: this.state.selectProvince,
+        //         selectSpecialty: this.state.selectSpecialty,
+        //     })
+        // }
     }
     handleEditorChange = ({ html, text }) => {
         this.setState({
@@ -170,14 +185,15 @@ class manageDoctor extends Component {
     }
     handleChange = async (selectedOption) => {
         this.setState({ selectedOption });
-        let { listPayment, listPrice, listProvince } = this.state
+        let { listPayment, listPrice, listProvince, listSpecaialty } = this.state
         let res = await getInfoDoctor(selectedOption.value)
         if (res && res.errCode === 0 && res.data && res.data.markdown) {
             let markdown = res.data.markdown
 
             let addressClinic = '', nameClinic = '', note = '',
-                paymentId = '', priceId = '', provinceId = '',
-                selectPayment = '', selectPrice = '', selectProvince = ''
+                paymentId = '', priceId = '', provinceId = '', specialtyId = '',
+                selectPayment = '', selectPrice = '', selectProvince = '',
+                selectSpecialty = ''
 
             if (res.data.doctor_info) {
                 addressClinic = res.data.doctor_info.addressClinic
@@ -186,7 +202,7 @@ class manageDoctor extends Component {
                 paymentId = res.data.doctor_info.paymentId
                 priceId = res.data.doctor_info.priceId
                 provinceId = res.data.doctor_info.provinceId
-
+                specialtyId = res.data.doctor_info.specialtyId
 
                 selectPayment = listPayment.find(item => {
                     return item && item.value === paymentId
@@ -196,6 +212,9 @@ class manageDoctor extends Component {
                 })
                 selectProvince = listProvince.find(item => {
                     return item && item.value === provinceId
+                })
+                selectSpecialty = listSpecaialty.find(item => {
+                    return item && item.value === specialtyId
                 })
             }
             this.setState({
@@ -207,9 +226,26 @@ class manageDoctor extends Component {
                 note: note,
                 selectPayment: selectPayment,
                 selectPrice: selectPrice,
-                selectProvince: selectProvince
+                selectProvince: selectProvince,
+                selectSpecialty: selectSpecialty,
+                hasOldData: false
             })
         }
+        // else {
+        //     this.setState({
+        //         contentHTML: '',
+        //         contentMarkdown: '',
+        //         description: '',
+        //         addressClinic: '',
+        //         nameClinic: '',
+        //         note: '',
+        //         selectPayment: '',
+        //         selectPrice: '',
+        //         selectProvince: '',
+        //         selectSpecialty: '',
+        //         hasOldData: false
+        //     })
+        // }
         if (!res.data.markdown.contentHTML) {
             this.setState({
                 contentHTML: '',
@@ -264,9 +300,16 @@ class manageDoctor extends Component {
                 hasOldData: false
             })
         }
+        if (!res.data.doctor_info.specialtyId) {
+            this.setState({
+                specialtyId: '',
+                hasOldData: false
+            })
+        }
         if (res.data.markdown.description && res.data.markdown.contentMarkdown && res.data.markdown.contentHTML
             && res.data.doctor_info.addressClinic && res.data.doctor_info.nameClinic && res.data.doctor_info.note
-            && res.data.doctor_info.paymentId && res.data.doctor_info.priceId && res.data.doctor_info.provinceId) {
+            && res.data.doctor_info.paymentId && res.data.doctor_info.priceId && res.data.doctor_info.provinceId
+            && res.data.doctor_info.specialtyId) {
             this.setState({
                 hasOldData: true
             })
@@ -289,6 +332,7 @@ class manageDoctor extends Component {
     }
     render() {
         let { hasOldData, listSpecaialty } = this.state
+        console.log('check state ', this.state)
         return (
             < div className='manage-doctor-container' >
                 <div className='manage-doctor-title'>

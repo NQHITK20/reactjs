@@ -60,7 +60,6 @@ class BookingModal extends Component {
         }
         if (this.props.dataShit !== prevProps.dataShit) {
             if (this.props.dataShit && !_.isEmpty(this.props.dataShit)) {
-                console.log('check datashit', this.props.dataShit)
                 let doctorId = this.props.dataShit.doctorId
                 let timeType = this.props.dataShit.timeType
                 this.setState({
@@ -147,7 +146,6 @@ class BookingModal extends Component {
             doctorId = dataShit.doctorId
         }
 
-        console.log('check datashit', dataShit)
         return (
             <Modal isOpen={isOpenModal}
                 className={'booking-modal-container'}

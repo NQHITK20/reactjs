@@ -26,7 +26,7 @@ class DefaultClass extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.languages
+        language: state.app.language
 
 
     };

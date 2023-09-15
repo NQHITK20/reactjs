@@ -6,6 +6,7 @@ import { getProfileById } from '../../../services/userService';
 import { languages } from '../../../utils';
 import _ from 'lodash';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 
 class ProfileDoctor extends Component {
@@ -54,7 +55,7 @@ class ProfileDoctor extends Component {
     }
     render() {
         let { dataProfile } = this.state
-        let { language, isShowDes, dataShit } = this.props
+        let { language, isShowDes, dataShit, isShowLinkDetail, isShowPrice, doctorId } = this.props
         let nameVi = '', nameEn = ''
         if (dataProfile && dataProfile.positionData) {
             nameVi = `${dataProfile.positionData.valueVi} ${dataProfile.lastName} ${dataProfile.firstName}`
@@ -83,13 +84,18 @@ class ProfileDoctor extends Component {
                         }
                     </div>
                 </div>
-                <div className='price'><FormattedMessage id='patient.booking-modal.price' />:
+                {isShowLinkDetail === true && <div className='view-detail-doctor'>
+                    <Link to={`/detail-doctor/${doctorId}`}>Xem thêm</Link>
+                </div>}
+                {isShowPrice === true &&
+                    <div className='price'><FormattedMessage id='patient.booking-modal.price' />:
 
-                    {dataProfile && dataProfile.doctor_info && language === languages.VI ?
-                        dataProfile.doctor_info.priceData.valueVi + ' VND' : ''}
-                    {dataProfile && dataProfile.doctor_info && language === languages.EN ?
-                        dataProfile.doctor_info.priceData.valueEn + ' $' : ''}
-                </div>
+                        {dataProfile && dataProfile.doctor_info && language === languages.VI ?
+                            dataProfile.doctor_info.priceData.valueVi + ' VND' : ''}
+                        {dataProfile && dataProfile.doctor_info && language === languages.EN ?
+                            dataProfile.doctor_info.priceData.valueEn + ' $' : ''}
+                    </div>
+                }
             </div>
 
         );

@@ -37,7 +37,8 @@
         },
         "doctor": {
             "doctor": "Bác sĩ",
-            "manage-schedule": "Quản lý khám bệnh"
+            "manage-schedule": "Quản lý khám bệnh",
+            "manage-patient": "Quản lý Khám bệnh nhân"
         }
     },
     "manage-user": {

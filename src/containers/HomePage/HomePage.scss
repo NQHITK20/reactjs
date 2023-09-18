@@ -64,6 +64,29 @@
 
     }
 
+    &.sp-2 {
+        .Sp-content {
+            .Sp-body {
+                .img-nude {
+                    border       : 10px solid #efeef5;
+                    margin-bottom: -65px;
+
+                    .imgg {
+                        height       : 120px;
+                        width        : 120px;
+                        margin       : 0 auto;
+                        border-radius: 50%;
+                    }
+
+                    p {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+    }
+
     &.sp-3 {
         background   : #f5f5f5;
         border-bottom: 3px solid #efeef5;

@@ -5,13 +5,32 @@ import { FormattedMessage } from 'react-intl'
 import Slider from 'react-slick';
 import "../../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../../node_modules/slick-carousel/slick/slick-theme.css";
-import anh from "../../../assets/specialty/anh.jpg"
-
+import { getAllClinic } from '../../../services/userService';
+import { withRouter } from 'react-router';
 
 class Sp2 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataClinic: []
 
+        }
+    }
+    async componentDidMount() {
+        let res = await getAllClinic()
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataClinic: res.data ? res.data : []
+            })
+        }
+    }
+    handleViewDetailClinic = (clinic) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-clinic/${clinic.id}`)
+        }
+    }
     render() {
-
+        let { dataClinic } = this.state
         return (
             <div className='section-Sp sp-2'>
                 <div className='Sp-content'>
@@ -21,12 +40,11 @@ class Sp2 extends Component {
                     </div>
                     <div className='Sp-body'>
                         <Slider {...this.props.settings}>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
-                            <div className='img-nude'><img src={anh} /><p>best doctor</p></div>
+                            {dataClinic && dataClinic.length > 0 && dataClinic.map((item, index) => {
+                                return (
+                                    <div className='img-nude' key={index} onClick={() => this.handleViewDetailClinic(item)}><img src={item.image} /><p>{item.name}</p></div>
+                                )
+                            })}
                         </Slider>
                     </div>
                 </div>
@@ -49,4 +67,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sp2);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sp2));

@@ -94,14 +94,15 @@ class BookingModal extends Component {
         let date = new Date(this.state.birthday).getTime()
         let timeString = this.buildTimeBooking(this.props.dataShit)
         let doctorName = this.buildDoctorName(this.props.dataShit)
-
+        console.log('check aaa', this.props.dataShit)
         let res = await postPatientBookAppointment({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
             email: this.state.email,
             address: this.state.address,
             reason: this.state.reason,
-            date: date,
+            date: this.props.dataShit.date,
+            birthday: date,
             selectedGender: this.state.selectedGender.value,
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
@@ -133,8 +134,6 @@ class BookingModal extends Component {
         let { language } = this.props
         if (datashit && !_.isEmpty(datashit)) {
             let name = language === languages.VI ? `${datashit.doctorData.lastName}  ${datashit.doctorData.firstName}` : `${datashit.doctorData.firstName}  ${datashit.doctorData.lastName}`
-
-
             return name
         }
         return ''

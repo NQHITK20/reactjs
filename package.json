@@ -13,7 +13,6 @@
     "lodash": "^4.17.21",
     "markdown-it": "^12.1.0",
     "moment": "^2.29.0",
-    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-auth-wrapper": "^1.0.0",
     "react-autosuggest": "^10.1.0",
@@ -45,7 +44,7 @@
     "typescript": "^4.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -64,5 +63,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.69.5"
   }
 }
